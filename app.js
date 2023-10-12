@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const createError = require('http-errors');
+const { verifyAccessToken } = require('./helpers/jwt_helper');
 
 require('./helpers/init_mongodb');
 
@@ -12,7 +13,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', async (req, res, next) => {
+app.get('/', verifyAccessToken, async (req, res, next) => {
   res.send('Hello from express.');
 });
 
