@@ -5,6 +5,8 @@ const createError = require('http-errors');
 const { verifyAccessToken } = require('./helpers/jwt_helper');
 
 require('./helpers/init_mongodb');
+const redis = require('./helpers/init_redis');
+redis();
 
 const AuthRoute = require('./Routes/Auth.route');
 
